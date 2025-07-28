@@ -9,7 +9,17 @@ from database import SessionLocal, engine
 from models import Product
 from schemas import ProductCreate, ProductOut
 
+from fastapi.middleware.cors import CORSMiddleware
+
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # para testar, depois restringe
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 UPLOAD_FOLDER = "./images"
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
